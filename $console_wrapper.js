@@ -18,10 +18,6 @@
  * By using this method we're safe to use "$" internally as users may change the $ alias 
  * Pass in jQuery into this function
  * See: http://docs.jquery.com/Plugins/Authoring for more information
- *
- * Change log:
- * 1.0.0: Initial
- * 1.0.1: Added logParams function
  */
 (function($) {
   /**
@@ -134,7 +130,7 @@
      * @return True if can run command, false if not
      */
     that.canLog = function(pLevel){
-      return level >= pLevel && level != levels.off ;
+      return level >= pLevel;
     };//canLog
 
     /**
@@ -173,51 +169,6 @@
       var check = document.getElementById('pdebug');
       return check != undefined && $('#pdebug').val().toLowerCase() == 'yes';
     }; //isApexDebug
-    
-    /**
-     * Will log parameters and display based on options
-     * Easiest to call just by $.console.logParams(); This will use default parameters (recommended)
-     * 
-     * @param pOptions JSON object with the following values
-     *  - createGroup boolean If true a group will be created (and closed appropriately)
-     *  - groupCollapsed boolean If createGroup is true, this determines if the group is collapased or not
-     *  - groupText string If create group is true, this will be the name of the group
-     */
-    that.logParams = function(pOptions){
-      if (!(this.canLog(levels.log))){
-        return; //Don't run code if we can't log
-      }
-      
-      //Set Default options
-      var defaults = {
-        createGroup : true, //Wrap all the parameters in a group
-        groupCollapsed : true,
-        groupText : 'Parameters'
-      };
-      pOptions = jQuery.extend(true,defaults,pOptions);
-      
-      var callingFn = arguments.callee.caller; //This is the function that called this function
-      // Got following line from: http://stackoverflow.com/questions/914968/inspect-the-names-values-of-arguments-in-the-definition-execution-of-a-javascript
-      var argList = /\(([^)]*)/.exec(callingFn)[1].split(','); // Get the name of all the arguments in the function. 
-      var args = Array.prototype.slice.call(callingFn.arguments); //This is an array of arguments passed into the calling function (not this function)
-      
-      if (pOptions.createGroup){
-        if (pOptions.groupCollapsed)
-          this.groupCollapsed(pOptions.groupText);
-        else
-          this.group(pOptions.groupText);
-      }//if Create Group
-      
-      //Display each argument
-      for(var i = 0, iMax = args.length; i < iMax; i++) {
-        this.log((i < argList.length ? argList[i].trim() : 'unassigned') + ':', args[i]);
-      }//for
-      
-      //Close group if nessary
-      if (pOptions.createGroup){
-        $.console.groupEnd();
-      }
-    }//logParams
 
     //Apply console functions to "that"
     for (i=0; i < consoleFns.length; i++){
@@ -241,14 +192,4 @@
     if ($.console.isApexDebug())
       $.console.setLevel('log');
   });
-  
-  //Add string.trim() function since IE doesn't support this
-  //Trim function is used in logParams function
-  //Code from: http://stackoverflow.com/questions/2308134/trim-in-javascript-not-working-in-ie
-  if(typeof String.prototype.trim !== 'function') {
-    String.prototype.trim = function() {
-      return this.replace(/^\s+|\s+$/g, ''); 
-    }
-  }
-
 })(jQuery);

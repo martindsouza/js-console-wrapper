@@ -1,5 +1,10 @@
 /** 
- * Logging package for APEX
+ * JavaScript Console Wrapper
+ * (originally called logger for APEX)
+ * Project Site: http://code.google.com/p/js-console-wrapper/
+ * Source (SVN): https://js-console-wrapper.googlecode.com/svn/trunk/$console_wrapper.js
+ * License: GNU General Public License, version 3 (GPLv3)
+ *  - http://opensource.org/licenses/gpl-3.0.html
  * @author Martin Giffy D'Souza http://www.talkapex.com
  *
  * Used to wrap calls to console which allows developers to instrument their JS code
@@ -13,6 +18,8 @@
  *
  * Reference:
  *  - Firebug Console Commands: http://getfirebug.com/logging
+ *  - Console API: http://getfirebug.com/wiki/index.php/Console_API
+ *  - Console Example: http://www.tuttoaster.com/learning-javascript-and-dom-with-console/
  *
  * Notes:
  * By using this method we're safe to use "$" internally as users may change the $ alias 
@@ -20,8 +27,10 @@
  * See: http://docs.jquery.com/Plugins/Authoring for more information
  *
  * Change log:
+ * 1.0.1: 
+ *  - Added logParams function
+ *  - Fixed canLog function (didn't detect the off level before)
  * 1.0.0: Initial
- * 1.0.1: Added logParams function
  */
 (function($) {
   /**

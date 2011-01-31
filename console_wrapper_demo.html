@@ -24,6 +24,10 @@
       // assumes you have a <span class="red">...</span> tag
       $.console.group('*** jQuery Chained Function ***');
       $('.red').log('Before Red').css({color:'red'}).log('After Red');
+      $.console.groupEnd();
+      
+      // Warning for chained function
+      $.console.group('*** jQuery Chained Function (warn) ***');
       $('.red').log('warn','Before Red').css({color:'red'}).log('After Red');
       $.console.groupEnd();
       

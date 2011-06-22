@@ -27,6 +27,8 @@
  * See: http://docs.jquery.com/Plugins/Authoring for more information
  *
  * Change log:
+ * 1.0.2:
+ *  - Fixed issue if first argument was not a string (error was occurring on first argument check)
  * 1.0.1: 
  *  - Added logParams function
  *  - Fixed canLog function (didn't detect the off level before)
@@ -58,7 +60,7 @@
     var args = Array.prototype.slice.call(arguments);
 
     //If first argument is a log command then use it, otherwise use log and remove it
-    if( arguments.length > 0 && $.inArray(arguments[0].toLowerCase(),logFns) >= 0){
+    if( arguments.length > 0 && (typeof(arguments[0])).toLowerCase() === 'string' && $.inArray(arguments[0].toLowerCase(),logFns) >= 0){
       cmd = arguments[0];
       //Remove first element since don't want it to appear anymore
       args.shift();

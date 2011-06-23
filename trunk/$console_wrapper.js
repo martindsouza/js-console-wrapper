@@ -27,6 +27,8 @@
  * See: http://docs.jquery.com/Plugins/Authoring for more information
  *
  * Change log:
+ * 1.0.3:
+ *  - In logParams, changed "log" to "warn" for unassigned parameters 
  * 1.0.2:
  *  - Fixed issue if first argument was not a string (error was occurring on first argument check)
  * 1.0.1: 
@@ -221,7 +223,13 @@
       
       //Display each argument
       for(var i = 0, iMax = args.length; i < iMax; i++) {
-        this.log((i < argList.length ? argList[i].trim() : 'unassigned') + ':', args[i]);
+        if (i < argList.length){
+          this.log(argList[i].trim() + ':', args[i]);
+        }
+        else {
+          //Unassigned
+          this.warn('unassigned:', args[i]);
+        }
       }//for
       
       //Close group if nessary

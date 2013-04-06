@@ -1,0 +1,84 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
+<script src="$console_wrapper.js" type="text/javascript"></script>
+<script type="text/javascript">
+  function myFn(pA, pB){
+    $.console.logParams();
+    //do something as part of function
+  }//myFn
+  
+  $(document).ready(function() {
+    if (window.console) {
+      //Enable logging mode
+      $.console.setLevel('log');
+      
+      // 2 ways of calling Console
+      // *** Standalone ***
+      $.console.group('*** Stand Alone ***');
+      $.console.log('Current log level: ', $.console.getLevel());
+      $.console.warn('This is a warning message');
+      $.console.groupEnd();
+      
+      // *** jQuery Chained Function ***
+      // assumes you have a <span class="red">...</span> tag
+      $.console.group('*** jQuery Chained Function ***');
+      $('.red').log('Before Red').css({color:'red'}).log('After Red');
+      $.console.groupEnd();
+      
+      // Warning for chained function
+      $.console.group('*** jQuery Chained Function (warn) ***');
+      $('.red').log('warn','Before Red').css({color:'red'}).log('After Red');
+      $.console.groupEnd();
+      
+      // *** logParams ***
+      myFn(1,2,3);
+    }
+    else {
+      // Console does not exist
+      window.alert('Browser does not support "console" or must enable "console"'); 
+    }
+  });
+
+</script>  
+
+</head>
+
+<body>
+
+<h1>JavaScript Logger Demo</h1>
+Developed by Martin Giffy D'Souza: <a href="http://www.talkapex.com">www.talkapex.com</a><br>
+<a href="mailto:martin@talkapex.com">martin@talkapex.com</a>
+
+<h2>Info</h2>
+<p>
+Please open your browser console to see example output.<br>
+Look at HTML source file and logger.js file for examples
+</p>
+
+<h2>Additional Commands</h2>
+<p>
+The conosole API can be found here: - Console APIs: <a href="http://getfirebug.com/wiki/index.php/Console_API">http://getfirebug.com/wiki/index.php/Console_API</a><br>
+This console wrapper allows you to set levels:<br>
+<span style="font-style:italic">$.console.setLevel(pLevel);</span><br>
+Available levels are:   off, exception, error, warn, info, log, debug. Log and debug are equivalent.
+<br>
+To view current debug level: <span style="font-style:italic">$.console.getLevel();</span><br>
+<br>
+When used in APEX applications that are running in APEX Debug mode, level is automatically set to "log".
+</p>
+
+<h2>Additional Reading</h2>
+<p>
+- Console APIs: <a href="http://getfirebug.com/wiki/index.php/Console_API">http://getfirebug.com/wiki/index.php/Console_API</a><br>
+- Example: <a href="http://getfirebug.com/logging">http://getfirebug.com/logging</a><br>
+- Example: <a href="http://www.tuttoaster.com/learning-javascript-and-dom-with-console/">http://www.tuttoaster.com/learning-javascript-and-dom-with-console/</a><br>
+</p>
+
+<p>
+For Examples<br>
+<span class="red">span 1</span><br>
+<span class="red">span 2</span><br>
+</p>
+</body>
+</html>

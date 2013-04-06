@@ -5,7 +5,7 @@
  * Source (SVN): https://js-console-wrapper.googlecode.com/svn/trunk/$console_wrapper.js
  * License: GNU General Public License, version 3 (GPLv3)
  *  - http://opensource.org/licenses/gpl-3.0.html
- * @author Martin Giffy D'Souza http://www.talkapex.com
+ * @author Martin Giffy D'Souza http://www.talkapex.com martin@talkapex.com
  *
  * Used to wrap calls to console which allows developers to instrument their JS code
  * This supports 2 ways of logging
@@ -27,6 +27,10 @@
  * See: http://docs.jquery.com/Plugins/Authoring for more information
  *
  * Change log:
+ *
+ * 1.0.4:
+ *  - Fix issue with IE9/10 (i.e. versions greater than IE8 which displayed the "Object doesn't support property or method 'apply'
+ *  - For console methods that aren't supported by IE (ex group) will default to .log
  * 1.0.3:
  *  - In logParams, changed "log" to "warn" for unassigned parameters 
  * 1.0.2:
@@ -237,6 +241,40 @@
         $.console.groupEnd();
       }
     }//logParams
+    
+    
+    //IE 9/10 fix "Object doesn't support property or method 'apply'" error message 
+    //References
+    //  - http://stackoverflow.com/questions/5538972/console-log-apply-not-working-in-ie9
+    //  - http://whattheheadsaid.com/2011/04/internet-explorer-9s-problematic-console-object
+    if (Function.prototype.bind && console && typeof console.log == "object") {
+      //Test to see if the "apply" function exists
+      //If it doesn't work need to change the object (below)
+      try{
+        console.log.apply(console);
+      }
+      catch(err){
+        
+        //Convert the console functions to an array
+        var fnArray = [];
+        for (var i=0; i < consoleFns.length; i++){
+          fnArray[i] = consoleFns[i].fn;
+        }
+
+        fnArray.forEach(function (method) {
+          //Work around to get over the fact that IE doesn't support all console commans (ex: group)
+          //List of commands IE supports: http://msdn.microsoft.com/en-ca/library/ie/gg589530(v=vs.85).aspx
+          //If it does not support a command then it will revert to standard "log"
+          if (typeof console[method] != 'object'){
+            console[method] = this.bind(console.log, console);
+          }
+          else{
+            console[method] = this.bind(console[method], console);
+          }
+        }, Function.prototype.call);
+      }//catch       
+    }//if (Function.prototype
+
 
     //Apply console functions to "that"
     for (i=0; i < consoleFns.length; i++){

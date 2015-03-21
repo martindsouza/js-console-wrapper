@@ -26,7 +26,7 @@ Console wrapper is developed by [Martin Giffy D'Souza](http://www.talkapex.com).
 You can view some of the console wrapper functions [here](http://apex.oracle.com/pls/apex/f?p=16406:1200:0)
 
 # Setup #
-The console wrapper leverages [jQuery](http://www.jquery.com). To load the console wrapper include both [jQuery](http://www.jquery.com) and the [$console\_wrapper.js](https://js-console-wrapper.googlecode.com/svn/trunk/$console_wrapper.js) file:
+The console wrapper leverages [jQuery](http://www.jquery.com). To load the console wrapper include both [jQuery](http://www.jquery.com) and the [`$console_wrapper.js`]($console_wrapper.js) file:
 
 ```html
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>

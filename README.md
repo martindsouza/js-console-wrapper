@@ -139,5 +139,5 @@ The console wrapper was originally designed for [Oracle APEX](http://apex.oracle
   * 1.0.1
     * Added `logParams` function
     * Fixed `canLog` function (didn't detect the off level before)
-  * [1.0.0](releases/tag/1.0.0)
+  * [1.0.0](/releases/tag/1.0.0)
     * Initial

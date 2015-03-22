@@ -126,17 +126,17 @@ The console wrapper was originally designed for [Oracle APEX](http://apex.oracle
 
 
 # Change Log #
-  * 1.0.4
+  * [1.0.4](../..//releases/tag/1.0.4)
     * Blogs:
       * http://www.talkapex.com/2013/04/console-wrapper-104.html
       * http://www.talkapex.com/2013/03/console-wrapper-104-beta.html
     * Fix issue with IE9/10 (i.e. versions greater than IE8 which displayed the "Object doesn't support property or method 'apply'
     * For console methods that aren't supported by IE (ex group) will default to .log
-  * 1.0.3
+  * [1.0.3](../..//releases/tag/1.0.3)
     * In `logParams`, changed "log" to "warn" for unassigned parameters
-  * 1.0.2
+  * [1.0.2](../..//releases/tag/1.0.2)
     * Fixed issue if first argument was not a string (error was occurring on first argument check)
-  * 1.0.1
+  * [1.0.1](../..//releases/tag/1.0.1)
     * Added `logParams` function
     * Fixed `canLog` function (didn't detect the off level before)
   * [1.0.0](../..//releases/tag/1.0.0)
